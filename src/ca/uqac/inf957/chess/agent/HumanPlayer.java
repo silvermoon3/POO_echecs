@@ -13,7 +13,7 @@ public class HumanPlayer extends Player {
     public boolean move(Move mv) {
 	// TODO: check the move
 	// Make the move 
-    playGround.movePiece(mv);
+    
 	return super.move(mv);
     }
 

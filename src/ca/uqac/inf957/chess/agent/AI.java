@@ -16,7 +16,7 @@ public class AI extends Player {
     @Override
     public boolean move(Move mv) {	
     	//playGround.movePiece(mv);
-    	return true;
+    	return super.move(mv);
     }
 
     @Override

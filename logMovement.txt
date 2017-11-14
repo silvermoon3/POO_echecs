@@ -1,0 +1,4 @@
+Coup:b7b5
+Coup:d2d4
+Coup:a7a5
+Coup:g2g4
