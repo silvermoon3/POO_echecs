@@ -20,7 +20,5 @@ public class King extends Piece {
     	return (Math.abs(mv.xI - mv.xF) <= 1) && (Math.abs(mv.yI - mv.yF) <= 1);
     }
     
-    public String getType() {
-    	return "King";
-    }
+   
 }

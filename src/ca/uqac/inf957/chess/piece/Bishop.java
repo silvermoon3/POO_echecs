@@ -26,8 +26,5 @@ public class Bishop extends Piece {
 		}
 		return Math.abs(moveY / moveX) == 1.0;	
     }
-    
-    public String getType() {
-    	return "Bishop";
-    }
+
 }

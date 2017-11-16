@@ -24,7 +24,5 @@ public class Queen extends Piece {
 		return r.isMoveLegal(mv) || b.isMoveLegal(mv);
     }
     
-    public String getType() {
-    	return "Queen";
-    }
+  
 }

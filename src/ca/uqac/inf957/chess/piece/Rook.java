@@ -23,7 +23,5 @@ public class Rook extends Piece {
     	return (( mv.xI - mv.xF) == 0) || ((mv.yI - mv.yF) == 0);
     }
     
-    public String getType() {
-    	return "Rook";
-    }
+ 
 }

@@ -36,5 +36,5 @@ public abstract class Piece {
 		return null;
 	}
      
-     public abstract String getType();
+     
 }

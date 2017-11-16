@@ -12,8 +12,7 @@ public class HumanPlayer extends Player {
     @Override
     public boolean move(Move mv) {
 	// TODO: check the move
-	// Make the move 
-    
+	// Make the move     
 	return super.move(mv);
     }
 

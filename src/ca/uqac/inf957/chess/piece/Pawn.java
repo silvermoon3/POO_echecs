@@ -36,8 +36,6 @@ public class Pawn extends Piece {
 
     }
     
-    public String getType() {
-    	return "Pawn";
-    }
+   
 
 }

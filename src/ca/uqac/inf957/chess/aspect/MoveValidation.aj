@@ -5,6 +5,7 @@ import ca.uqac.inf957.chess.agent.*;
 import ca.uqac.inf957.chess.piece.Piece;
 
 
+import ca.uqac.inf957.chess.piece.*;
 
 public aspect MoveValidation {
 
@@ -37,30 +38,25 @@ public aspect MoveValidation {
 
 		if(moveValid) {		
 			Piece piece = b.getGrid()[mv.xI][mv.yI].getPiece();
-			switch(piece.getType()) {
-				case "Bishop" : moveValid =  checkBishop(b, mv, piece.getPlayer());
-				break;
-				case "King" : moveValid =  checkKing(b, mv, piece.getPlayer());
-				break;
-				case "Knight" : moveValid =  checkKnight(b,mv,piece.getPlayer());
-				break;
-				case "Pawn" : moveValid =  checkPawn(b,mv,piece.getPlayer());
-				break;
-				case "Queen" : moveValid =  checkQueen(b, mv, piece.getPlayer());
-				break;
-				case "Rook" : moveValid=  checkRook(b,mv,piece.getPlayer());
-				break;
-			}
+			if 		(piece instanceof Bishop) 	moveValid= checkBishop(b, mv, piece.getPlayer());
+			else if (piece instanceof King) 	moveValid= checkKing(b, mv, piece.getPlayer());
+			else if (piece instanceof Knight) 	moveValid= checkKnight(b, mv, piece.getPlayer());
+			else if (piece instanceof Pawn) 	moveValid= checkPawn(b, mv, piece.getPlayer());
+			else if (piece instanceof Queen) 	moveValid= checkQueen(b, mv, piece.getPlayer());
+			else if (piece instanceof Rook) 	moveValid= checkRook(b, mv, piece.getPlayer());			
+	
 		}
 		if(moveValid)
 			b.movePiece(mv);
+		
 		return moveValid;			
 	
 	}
 	
 	
 	private static boolean checkPawn(Board b, Move mv, int p) 
-	{					
+	{	
+		
 		//Joueur noir
 		if(p == Player.WHITE)
 		{			
@@ -296,5 +292,7 @@ public aspect MoveValidation {
 	}
 
 	
+
+	 
 }
 
