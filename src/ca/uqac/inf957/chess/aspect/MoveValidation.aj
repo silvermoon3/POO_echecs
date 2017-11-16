@@ -10,7 +10,7 @@ public aspect MoveValidation {
 
 	
 	pointcut Check(Move mv): call(boolean Player.move(Move))
-		&& args(.., mv)
+		&& args(mv)
 		&& target(Player)
 		&& !within(MoveValidation);
 	
@@ -57,6 +57,93 @@ public aspect MoveValidation {
 		return moveValid;			
 	
 	}
+	
+	
+	private static boolean checkPawn(Board b, Move mv, int p) 
+	{					
+		//Joueur noir
+		if(p == Player.WHITE)
+		{			
+			//Pas de retour arriere
+			if(mv.yF <= mv.yI)
+			{
+				return false;
+			}
+			//2 déplacements au départ
+			if(mv.yI != 1)
+			{
+				if(mv.yF > mv.yI + 1)
+				{
+					return false;
+				} 				
+			}
+			//Gestion pour manger une pièce adverse 
+			if(b.getGrid()[mv.xF][mv.yF].isOccupied())
+			{
+				//Impossible de manger tout droit
+				if (mv.xF == mv.xI)
+				{
+					return false;
+				}
+				
+				//Ne mange pas ses propres pieces
+				else if(b.getGrid()[mv.xF][mv.yF].getPiece().getPlayer() == Player.WHITE)
+				{
+					return false;
+				} 
+				
+			}
+			
+			else if(mv.xF != mv.xI)
+			{
+				return false;
+			}
+		
+			return true;
+				
+		} 
+		else 
+		{			
+			//Pas de retour arriere
+			if(mv.yF >= mv.yI)
+			{
+				return false;
+			}
+			
+			//Au départ on peut déplacer de deux cases
+			if(mv.yI != 6)
+			{
+				if(mv.yF < mv.yI - 1)
+				{
+					return false;
+				} 				
+			}
+			
+			//Gestion pour manger une pièce adverse 
+			if(b.getGrid()[mv.xF][mv.yF].isOccupied())
+			{						
+				//Ne mange pas tout droit
+				if (mv.xF == mv.xI)
+				{
+					return false;
+				}
+				//Ne peut pas manger ses propres pièces
+				else if(b.getGrid()[mv.xF][mv.yF].getPiece().getPlayer() == Player.BLACK)
+				{
+					return false;
+				} 
+			}
+			
+			else if(mv.xF != mv.xI)
+			{
+				return false;
+			}
+			
+			return true;
+		}
+		
+	}
+	
 	
 	private static boolean checkQueen(Board b, Move mv, int p) {
 		if(mv.xF == mv.xI || mv.yF == mv.yI){
@@ -208,90 +295,6 @@ public aspect MoveValidation {
 		return true;
 	}
 
-	private static boolean checkPawn(Board b, Move mv, int p) 
-	{					
-		//Joueur noir
-		if(p == Player.WHITE)
-		{			
-			//Pas de retour arriere
-			if(mv.yF <= mv.yI)
-			{
-				return false;
-			}
-			//2 déplacements au départ
-			if(mv.yI != 1)
-			{
-				if(mv.yF > mv.yI + 1)
-				{
-					return false;
-				} 				
-			}
-			//Gestion pour manger une pièce adverse 
-			if(b.getGrid()[mv.xF][mv.yF].isOccupied())
-			{
-				//Impossible de manger tout droit
-				if (mv.xF == mv.xI)
-				{
-					return false;
-				}
-				
-				//Ne mange pas ses propres pieces
-				else if(b.getGrid()[mv.xF][mv.yF].getPiece().getPlayer() == Player.WHITE)
-				{
-					return false;
-				} 
-				
-			}
-			
-			else if(mv.xF != mv.xI)
-			{
-				return false;
-			}
-		
-			return true;
-				
-		} 
-		else 
-		{			
-			//Pas de retour arriere
-			if(mv.yF >= mv.yI)
-			{
-				return false;
-			}
-			
-			//Au départ on peut déplacer de deux cases
-			if(mv.yI != 6)
-			{
-				if(mv.yF < mv.yI - 1)
-				{
-					return false;
-				} 				
-			}
-			
-			//Gestion pour manger une pièce adverse 
-			if(b.getGrid()[mv.xF][mv.yF].isOccupied())
-			{						
-				//Ne mange pas tout droit
-				if (mv.xF == mv.xI)
-				{
-					return false;
-				}
-				//Ne peut pas manger ses propres pièces
-				else if(b.getGrid()[mv.xF][mv.yF].getPiece().getPlayer() == Player.BLACK)
-				{
-					return false;
-				} 
-			}
-			
-			else if(mv.xF != mv.xI)
-			{
-				return false;
-			}
-			
-			return true;
-		}
-		
-	}
 	
 }
 
