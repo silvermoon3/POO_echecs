@@ -17,10 +17,10 @@ public aspect MoveValidation {
 	boolean around(Move mv): Check (mv){
 		Player p = (Player) thisJoinPoint.getTarget();
 		Board b = p.getPlayGround();
-		return checkMove(b, mv, p); 
+		return checkMoveOfPiece(b, mv, p); 
 	}
 	
-	protected static boolean checkMove(Board b, Move mv, Player p){
+	protected static boolean checkMoveOfPiece(Board b, Move mv, Player p){
 		
 		boolean moveValid  = false;
 		try {

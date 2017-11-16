@@ -19,12 +19,12 @@ public class Bishop extends Piece {
 
     @Override
     public boolean isMoveLegal(Move mv) {
-    	float x = mv.xI - mv.xF;
-		float y = mv.yI - mv.yF;
-		if (x == 0) {
+    	float moveX = mv.xI - mv.xF;
+		float moveY = mv.yI - mv.yF;
+		if (moveX == 0) {
 			return false;
 		}
-		return Math.abs(y / x) == 1.0;	
+		return Math.abs(moveY / moveX) == 1.0;	
     }
     
     public String getType() {

@@ -16,22 +16,25 @@ public class Pawn extends Piece {
 
     @Override
     public boolean isMoveLegal(Move mv) {
-    	boolean special = false;
-    	// player1
-    			if (player == Player.BLACK) {
-    				if ((Math.abs(mv.xF - mv.xI) == 0) && (Math.abs(mv.yF - mv.yI) < 3)) {
-    					special = true;
-    				}
-    				return (((Math.abs(mv.xF - mv.xI) <= 1) && (mv.yF - mv.yI) == -1)) || special;
-    			}
-    			// player 2
+    	boolean first = false;
+    	
+    	if (player == Player.BLACK) 
+    	{
+    		if ((Math.abs(mv.xF - mv.xI) == 0) && (Math.abs(mv.yF - mv.yI) < 3)) 
+    		{
+    				first = true;
+    		}    				
+    				
+    		return (((Math.abs(mv.xF - mv.xI) <= 1) && (mv.yF - mv.yI) == -1)) || first;
+    	}
     			
-    			if ((Math.abs(mv.xF - mv.xI) == 0) && (Math.abs(mv.yF - mv.yI) < 3)) {
-    				special = true;
-    			}
-    			return (((Math.abs(mv.xF - mv.xI) <= 1) && (mv.yF - mv.yI) == 1)) || special;
+    	if ((Math.abs(mv.xF - mv.xI) == 0) && (Math.abs(mv.yF - mv.yI) < 3))    	
+    	{
+    				first = true;
+    	}    			
+    	return (((Math.abs(mv.xF - mv.xI) <= 1) && (mv.yF - mv.yI) == 1)) || first;
 
-	    }
+    }
     
     public String getType() {
     	return "Pawn";

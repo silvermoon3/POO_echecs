@@ -16,11 +16,12 @@ public class Knight extends Piece {
 
     @Override
     public boolean isMoveLegal(Move mv) {
-    	if (Math.abs(mv.xI - mv.xF) == 2) {
+    	if (Math.abs(mv.xI - mv.xF) == 2)     	
 			return Math.abs((mv.yI - mv.yF)) == 1;
-		} else if (Math.abs(mv.xI - mv.xF) == 1) {
+    	
+		else if (Math.abs(mv.xI - mv.xF) == 1) 
 			return Math.abs((mv.yI - mv.yF)) == 2;
-		}
+		
 		return false;
 	}
     
