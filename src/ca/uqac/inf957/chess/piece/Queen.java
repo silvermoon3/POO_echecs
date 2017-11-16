@@ -19,9 +19,7 @@ public class Queen extends Piece {
 
     @Override
     public boolean isMoveLegal(Move mv) {
-    	Bishop b = new Bishop();
-    	Rook r = new Rook();		
-		return r.isMoveLegal(mv) || b.isMoveLegal(mv);
+    	return false;
     }
     
   

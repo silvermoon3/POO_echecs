@@ -39,7 +39,7 @@ pointcut logMovement(Move m) : call (void Board.movePiece(Move)) && args(m);
 		try {
 			
 			fw = new FileWriter(f, true);			
-			fw.write("Coup:" + m.toString() + System.getProperty("line.separator"));
+			fw.write("Coup effectué:" + m.toString()  + System.getProperty("line.separator"));
 			fw.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

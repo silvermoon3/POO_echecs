@@ -28,7 +28,7 @@ public aspect MoveValidation {
 			moveValid = (mv != null);
 			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].isOccupied();
 			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].getPiece().getPlayer() == p.getColor();
-			moveValid = moveValid && b.getGrid()[mv.xI][mv.yI].getPiece().isMoveLegal(mv);
+			moveValid = moveValid && isMoveLegal(mv, b.getGrid()[mv.xI][mv.yI].getPiece());
 			if (moveValid && b.getGrid()[mv.xF][mv.yF].isOccupied()) {
 				moveValid = moveValid && b.getGrid()[mv.xF][mv.yF].getPiece().getPlayer() != p.getColor();
 			}
@@ -53,6 +53,73 @@ public aspect MoveValidation {
 	
 	}
 	
+	private static boolean isMoveLegal(Move mv, Piece piece) {
+	
+		if 		(piece instanceof Bishop) 	return isMoveLegalBishop(mv);
+		else if (piece instanceof King) 	return isMoveLegalKing( mv);
+		else if (piece instanceof Knight) 	return isMoveLegalKnight( mv);
+		else if (piece instanceof Pawn) 	return isMoveLegalPawn(mv, piece.getPlayer());
+		else if (piece instanceof Queen) 	return isMoveLegalQueen( mv);
+		else if (piece instanceof Rook) 	return isMoveLegalRook(mv);		
+		
+		return false;
+		
+	}
+	
+	private static boolean isMoveLegalPawn(Move mv, int player) {
+		boolean first = false;
+    	
+    	if (player == Player.BLACK) 
+    	{
+    		if ((Math.abs(mv.xF - mv.xI) == 0) && (Math.abs(mv.yF - mv.yI) < 3)) 
+    		{
+    				first = true;
+    		}    				
+    				
+    		return (((Math.abs(mv.xF - mv.xI) <= 1) && (mv.yF - mv.yI) == -1)) || first;
+    	}
+    			
+    	if ((Math.abs(mv.xF - mv.xI) == 0) && (Math.abs(mv.yF - mv.yI) < 3))    	
+    	{
+    				first = true;
+    	}    			
+    	return (((Math.abs(mv.xF - mv.xI) <= 1) && (mv.yF - mv.yI) == 1)) || first;
+
+    }
+    
+	
+	private static boolean isMoveLegalBishop(Move mv) {
+		float moveX = mv.xI - mv.xF;
+		float moveY = mv.yI - mv.yF;
+		if (moveX == 0) {
+			return false;
+		}
+		return Math.abs(moveY / moveX) == 1.0;	    
+		
+	}
+   
+	private static boolean isMoveLegalKing(Move mv) {		
+    	return (Math.abs(mv.xI - mv.xF) <= 1) && (Math.abs(mv.yI - mv.yF) <= 1);
+	}
+	
+	
+	private static boolean isMoveLegalKnight(Move mv) {
+		if (Math.abs(mv.xI - mv.xF) == 2)     	
+			return Math.abs((mv.yI - mv.yF)) == 1;
+    	
+		else if (Math.abs(mv.xI - mv.xF) == 1) 
+			return Math.abs((mv.yI - mv.yF)) == 2;
+		
+		return false;
+	}
+	
+	private static boolean isMoveLegalQueen(Move mv) {
+		return isMoveLegalBishop(mv) || isMoveLegalRook(mv);
+	}
+	
+	private static boolean isMoveLegalRook(Move mv) {
+		return (( mv.xI - mv.xF) == 0) || ((mv.yI - mv.yF) == 0);
+	}
 	
 	private static boolean checkPawn(Board b, Move mv, int p) 
 	{	

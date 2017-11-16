@@ -16,8 +16,7 @@ public class King extends Piece {
 
     @Override
     public boolean isMoveLegal(Move mv) {
-    	
-    	return (Math.abs(mv.xI - mv.xF) <= 1) && (Math.abs(mv.yI - mv.yF) <= 1);
+     return false;
     }
     
    

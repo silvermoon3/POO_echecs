@@ -34,7 +34,7 @@ public class Game {
     }
 
     public static void main(String[] args) {
-	System.out.println("Chess : White are smallcaps ");
+	System.out.println("Chess : Black are smallcaps ");
 	new Game().play();
     }
 }

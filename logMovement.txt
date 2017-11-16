@@ -1,10 +1,8 @@
 Coup:a7a5
 Coup:d2d4
-Coup:a5a4
+Coup:a8a6
 Coup:g2g4
-Coup:e7e5
+Coup:b8c6
 Coup:e2e4
-Coup:e8e7
+Coup:c6d4
 Coup:f1e2
-Coup:e7d6
-Coup:c1e3

@@ -20,7 +20,7 @@ public class Rook extends Piece {
 
     @Override
     public boolean isMoveLegal(Move mv) {
-    	return (( mv.xI - mv.xF) == 0) || ((mv.yI - mv.yF) == 0);
+    	return false;
     }
     
  
